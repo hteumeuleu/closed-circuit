@@ -1,0 +1,7 @@
+name=Closed Circuit
+author=HTeuMeuLeu
+description=Closed Circuit for the Playdate.
+bundleID=com.hteumeuleu.closedcircuit
+version=1.0.0-dev
+buildNumber=1
+imagePath=SystemAssets
