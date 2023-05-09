@@ -8,16 +8,44 @@ ldtk.load("Levels/world.ldtk", false)
 function Game:init()
 
 	Game.super.init(self)
-	-- self.tiles = gfx.imagetable.new("Assets/tiles")
-	-- local s = gfx.sprite.new(self.tiles:getImage(1))
-	-- s:moveTo(200, 120)
-	-- s:add()
+	self:attachEvents()
 	self:goToLevel("Level_0")
+	self.player = Player()
 	self:load()
 	return self
 
 end
 
+-- attachEvents()
+--
+function Game:attachEvents()
+
+	local myInputHandlers = {
+
+		leftButtonDown = function()
+			self.player:left()
+		end,
+		rightButtonDown = function()
+			self.player:right()
+		end,
+		upButtonDown = function()
+			self.player:up()
+		end,
+		downButtonDown = function()
+			self.player:down()
+		end,
+		BButtonDown = function()
+			self.player:back()
+		end,
+
+	}
+	playdate.inputHandlers.push(myInputHandlers)
+
+end
+
+-- goToLevel()
+--
+-- based on SquidGodDev’s video tutorial.
 function Game:goToLevel(level_name)
 
 	gfx.sprite.removeAll()
@@ -36,6 +64,12 @@ function Game:goToLevel(level_name)
 			if emptyTiles then
 				gfx.sprite.addWallSprites(tilemap, emptyTiles, 10, 10)
 			end
+
+			-- Level outer walls
+			gfx.sprite.addEmptyCollisionSprite(0, 0, 400, 10)
+			gfx.sprite.addEmptyCollisionSprite(0, 230, 400, 10)
+			gfx.sprite.addEmptyCollisionSprite(0, 10, 10, 220)
+			gfx.sprite.addEmptyCollisionSprite(390, 10, 10, 220)
 		end
 	end
 

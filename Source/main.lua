@@ -6,6 +6,7 @@ import "CoreLibs/ui"
 import "CoreLibs/crank"
 
 import "Scripts/Libraries/LDtk"
+import "Scripts/Player"
 import "Scripts/Game"
 local g <const> = Game()
 
