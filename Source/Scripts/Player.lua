@@ -1,6 +1,7 @@
 class('Player').extends(playdate.graphics.sprite)
 
 local gfx <const> = playdate.graphics
+local circuitImageTable <const> = gfx.imagetable.new("Assets/circuit")
 
 -- Player
 --
@@ -35,7 +36,44 @@ end
 -- Leave a trace behind the player after moving.
 function Player:leaveTrace(x, y)
 
-	local image <const> = gfx.image.new(self.width, self.height, gfx.kColorWhite)
+	-- Set positions for n, n-1 and n-2 moves
+	local n = playdate.geometry.point.new(self.x, self.y)
+	local n1 = playdate.geometry.point.new(x, y)
+	local n2 = nil
+	if #self.history.array > 0 then
+		n2 = self.history.array[#self.history.array].point
+	end
+	-- Set circuit image index depending on n, n-1 and n-2
+	local imageIndex = 5
+	if n2 == nil then
+		if n.y == n1.y then
+			-- horizontal straight
+			imageIndex = 2
+		elseif n.x == n1.x then
+			-- vertical straight
+			imageIndex = 4
+		end
+	elseif n.y == n1.y and n.y == n2.y then
+		-- horizontal straight
+		imageIndex = 2
+	elseif n.x == n1.x and n.x == n2.x then
+		-- vertical straight
+		imageIndex = 4
+	elseif (n.x > n1.x and n2.y > n.y) or (n.y > n1.y and n2.x > n.x) then
+		-- top left
+		imageIndex = 1
+	elseif (n.x < n1.x and n2.y > n.y) or (n.y > n1.y and n2.x < n.x) then
+		-- top right
+		imageIndex = 3
+	elseif (n.x > n1.x and n2.y < n.y) or (n.y < n1.y and n2.x > n.x) then
+		-- bottom left
+		imageIndex = 7
+	elseif (n.x < n1.x and n2.y < n.y) or (n.y < n1.y and n2.x < n.x) then
+		-- bottom right
+		imageIndex = 9
+	end
+	-- Create sprite
+	local image <const> = circuitImageTable:getImage(imageIndex)
 	local sprite <const> = gfx.sprite.new(image)
 	sprite:setCenter(0, 0)
 	sprite:setCollideRect(0, 0, sprite:getSize())
