@@ -35,7 +35,7 @@ end
 --
 function Player:collisionResponse(other)
 
-	if other:isa(Light) and self.y == other.y then
+	if other:isa(Light) and self.y == other.y and not other.isOn then
 		return gfx.sprite.kCollisionTypeOverlap
 	else
 		return gfx.sprite.kCollisionTypeFreeze
