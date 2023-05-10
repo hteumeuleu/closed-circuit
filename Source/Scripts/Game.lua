@@ -80,10 +80,16 @@ function Game:goToLevel(level_name)
 		if entity.name == "Light" then
 			Light(entity.position.x + offset.x, entity.position.y + offset.y)
 		elseif entity.name == "Battery" then
-			Battery(entity.position.x + offset.x, entity.position.y + offset.y)
+			self.battery = Battery(entity.position.x + offset.x, entity.position.y + offset.y)
 		elseif entity.name == "Player" then
 			self.player = Player(entity.position.x + offset.x, entity.position.y + offset.y)
 		end
+	end
+
+	if self.battery and self.player then
+
+		self.player:attachBattery(self.battery)
+
 	end
 
 

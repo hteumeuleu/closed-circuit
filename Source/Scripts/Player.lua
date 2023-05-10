@@ -43,6 +43,14 @@ function Player:collisionResponse(other)
 
 end
 
+-- attachBattery()
+--
+function Player:attachBattery(b)
+
+	self.battery = b
+
+end
+
 -- leaveTrace(x, y)
 --
 -- Leave a trace behind the player after moving.
@@ -52,6 +60,9 @@ function Player:leaveTrace(x, y)
 	local n = playdate.geometry.point.new(self.x, self.y)
 	local n1 = playdate.geometry.point.new(x, y)
 	local n2 = nil
+	if self.battery ~= nil then
+		n2 = playdate.geometry.point.new(self.battery.x, self.battery.y)
+	end
 	if #self.history.array > 0 then
 		n2 = self.history.array[#self.history.array].point
 	end
