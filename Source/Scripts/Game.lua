@@ -3,6 +3,8 @@ class("Game").extends()
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
 local offset <const> = playdate.geometry.point.new(10, 10)
+local font <const> = gfx.font.new("Assets/closed")
+gfx.setFont(font)
 
 ldtk.load("Levels/world.ldtk", false)
 
