@@ -5,13 +5,13 @@ local circuitImageTable <const> = gfx.imagetable.new("Assets/circuit")
 
 -- Player
 --
-function Player:init()
+function Player:init(x, y)
 
 	Player.super.init(self)
 	local tiles <const> = gfx.imagetable.new("Levels/tiles")
 	self:setImage(tiles:getImage(1))
 	self:setCenter(0, 0)
-	self:moveTo(150, 10)
+	self:moveTo(x, y)
 	self:setZIndex(99)
 	self:setCollideRect(0, 0, self:getSize())
 	self:add()
@@ -28,6 +28,18 @@ function Player:init()
 		return table.remove(self.history.array)
 	end
 	return self
+
+end
+
+-- collisionResponse()
+--
+function Player:collisionResponse(other)
+
+	if other:isa(Light) and self.y == other.y then
+		return gfx.sprite.kCollisionTypeOverlap
+	else
+		return gfx.sprite.kCollisionTypeFreeze
+	end
 
 end
 
@@ -102,8 +114,16 @@ end
 function Player:move(newX, newY)
 
 	local previousX, previousY = self:getPosition()
-	local actualX, actualY = self:moveWithCollisions(newX, newY)
+	local actualX, actualY, collisions, length = self:moveWithCollisions(newX, newY)
 	if newX == actualX and newY == actualY then
+		if length > 0 then
+			for _, item in ipairs(collisions) do
+				if not item.overlaps and item.other:isa(Light) then
+					self:moveTo(self.x + (newX - previousX), self.y)
+					item.other:toggle()
+				end
+			end
+		end
 		local trace <const> = self:leaveTrace(previousX, previousY)
 		self.history:push(playdate.geometry.point.new(previousX, previousY), trace)
 	end

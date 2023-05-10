@@ -2,6 +2,7 @@ class("Game").extends()
 
 local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
+local offset <const> = playdate.geometry.point.new(10, 10)
 
 ldtk.load("Levels/world.ldtk", false)
 
@@ -10,7 +11,6 @@ function Game:init()
 	Game.super.init(self)
 	self:attachEvents()
 	self:goToLevel("Level_0")
-	self.player = Player()
 	self:load()
 	return self
 
@@ -56,22 +56,34 @@ function Game:goToLevel(level_name)
 			local layerSprite = gfx.sprite.new()
 			layerSprite:setTilemap(tilemap)
 			layerSprite:setCenter(0, 0)
-			layerSprite:moveTo(10, 10)
+			layerSprite:moveTo(offset.x, offset.y)
 			layerSprite:setZIndex(layer.zIndex)
 			layerSprite:add()
 
 			local emptyTiles = ldtk.get_empty_tileIDs(level_name, "Solid", layer_name)
 			if emptyTiles then
-				gfx.sprite.addWallSprites(tilemap, emptyTiles, 10, 10)
+				gfx.sprite.addWallSprites(tilemap, emptyTiles, offset.x, offset.y)
 			end
-
-			-- Level outer walls
-			gfx.sprite.addEmptyCollisionSprite(0, 0, 400, 10)
-			gfx.sprite.addEmptyCollisionSprite(0, 230, 400, 10)
-			gfx.sprite.addEmptyCollisionSprite(0, 10, 10, 220)
-			gfx.sprite.addEmptyCollisionSprite(390, 10, 10, 220)
 		end
 	end
+
+	-- Level outer walls
+	gfx.sprite.addEmptyCollisionSprite(0, 0, 400, 10)
+	gfx.sprite.addEmptyCollisionSprite(0, 230, 400, 10)
+	gfx.sprite.addEmptyCollisionSprite(0, 10, 10, 220)
+	gfx.sprite.addEmptyCollisionSprite(390, 10, 10, 220)
+
+	-- Entities
+	for index, entity in ipairs(LDtk.get_entities(level_name)) do
+		if entity.name == "Light" then
+			Light(entity.position.x + offset.x, entity.position.y + offset.y)
+		elseif entity.name == "Battery" then
+			Battery(entity.position.x + offset.x, entity.position.y + offset.y)
+		elseif entity.name == "Player" then
+			self.player = Player(entity.position.x + offset.x, entity.position.y + offset.y)
+		end
+	end
+
 
 end
 
