@@ -37,6 +37,8 @@ function Player:collisionResponse(other)
 
 	if other:isa(Light) and self.y == other.y and not other.isOn then
 		return gfx.sprite.kCollisionTypeOverlap
+	elseif other:isa(Battery) and self.level.progress == self.level.total then
+		return gfx.sprite.kCollisionTypeOverlap
 	else
 		return gfx.sprite.kCollisionTypeFreeze
 	end
@@ -48,6 +50,14 @@ end
 function Player:attachBattery(b)
 
 	self.battery = b
+
+end
+
+-- attachLevel()
+--
+function Player:attachLevel(l)
+
+	self.level = l
 
 end
 
@@ -102,6 +112,7 @@ function Player:leaveTrace(x, y)
 	sprite:setCollideRect(0, 0, sprite:getSize())
 	sprite:moveTo(x, y)
 	sprite:add()
+	print(self.level.progress)
 	return sprite
 
 end

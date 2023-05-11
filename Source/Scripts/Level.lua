@@ -10,6 +10,8 @@ local offset <const> = playdate.geometry.point.new(10, 10)
 function Level:init(index)
 
 	self.name = "Level_" .. index
+	self.total = 0
+	self.progress = 0
 	self:load()
 
 end
@@ -49,11 +51,14 @@ function Level:load()
 	-- Entities
 	for index, entity in ipairs(LDtk.get_entities(level_name)) do
 		if entity.name == "Light" then
-			Light(entity.position.x + offset.x, entity.position.y + offset.y)
+			local light = Light(entity.position.x + offset.x, entity.position.y + offset.y)
+			self.total += 1
+			light:attachLevel(self)
 		elseif entity.name == "Battery" then
 			self.battery = Battery(entity.position.x + offset.x, entity.position.y + offset.y)
 		elseif entity.name == "Player" then
 			self.player = Player(entity.position.x + offset.x, entity.position.y + offset.y)
+			self.player:attachLevel(self)
 		end
 	end
 
