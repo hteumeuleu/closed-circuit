@@ -8,7 +8,7 @@ function Game:init()
 
 	Game.super.init(self)
 	self:attachEvents()
-	self.level = Level(0)
+	self.level = Level(2)
 	self:load()
 	return self
 
@@ -34,6 +34,13 @@ function Game:attachEvents()
 		end,
 		BButtonDown = function()
 			self.level.player:back()
+			local function timerCallback()
+				self.level.player:back()
+			end
+			self.BButtonDownTimer = playdate.timer.keyRepeatTimer(timerCallback)
+		end,
+		BButtonUp = function()
+			self.BButtonDownTimer:remove()
 		end,
 
 	}

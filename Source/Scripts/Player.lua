@@ -38,7 +38,7 @@ end
 --
 function Player:collisionResponse(other)
 
-	if other:isa(Light) and self.y == other.y and not other.isOn then
+	if other:isa(Light) and not other.isOn then
 		return gfx.sprite.kCollisionTypeOverlap
 	elseif other:isa(Battery) and self.level.progress == self.level.total then
 		return gfx.sprite.kCollisionTypeOverlap
@@ -157,7 +157,7 @@ function Player:move(newX, newY)
 				if not item.overlaps and item.other:isa(Light) then
 					-- Check if we can move next to the light
 					local nextX = newX + (newX - previousX)
-					local nextY = self.y
+					local nextY = newY + (newY - previousY)
 					local nextActualX, nextActualY, nextCollisions, nextLength = self:checkCollisions(nextX, nextY)
 					-- If we landed on the next position without any collision
 					if nextX == nextActualX and nextY == nextActualY then
