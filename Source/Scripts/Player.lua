@@ -2,6 +2,8 @@ class('Player').extends(playdate.graphics.sprite)
 
 local gfx <const> = playdate.graphics
 local circuitImageTable <const> = gfx.imagetable.new("Assets/circuit")
+local moveSamplePlayer <const> = playdate.sound.sampleplayer.new("Sounds/move")
+local cantSamplePlayer <const> = playdate.sound.sampleplayer.new("Sounds/cant")
 
 -- Player
 --
@@ -113,6 +115,8 @@ function Player:leaveTrace(x, y)
 	sprite:setCollideRect(0, 0, sprite:getSize())
 	sprite:moveTo(x, y)
 	sprite:add()
+	-- Play sound
+	moveSamplePlayer:play()
 	return sprite
 
 end
@@ -129,6 +133,7 @@ function Player:back()
 		if item.callback then
 			item.callback()
 		end
+		moveSamplePlayer:play()
 
 	end
 

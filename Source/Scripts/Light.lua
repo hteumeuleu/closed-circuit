@@ -2,6 +2,7 @@ class('Light').extends(playdate.graphics.sprite)
 
 local gfx <const> = playdate.graphics
 local tiles <const> = gfx.imagetable.new("Levels/tiles")
+local activeSamplePlayer <const> = playdate.sound.sampleplayer.new("Sounds/active")
 
 -- Light
 --
@@ -34,6 +35,7 @@ function Light:toggle()
 			self.level.progress -= 1
 		end
 	end
+	activeSamplePlayer:play()
 
 end
 

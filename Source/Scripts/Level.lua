@@ -4,6 +4,7 @@ local gfx <const> = playdate.graphics
 local ldtk <const> = LDtk
 ldtk.load("Levels/world.ldtk", false)
 local offset <const> = playdate.geometry.point.new(10, 10)
+local winSamplePlayer <const> = playdate.sound.sampleplayer.new("Sounds/win")
 
 -- Level
 --
@@ -68,5 +69,13 @@ function Level:load()
 
 	end
 
+end
+
+-- win()
+--
+function Level:win()
+
+	print("Win!")
+	winSamplePlayer:play()
 
 end
