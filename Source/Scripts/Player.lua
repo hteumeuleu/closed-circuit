@@ -18,10 +18,11 @@ function Player:init(x, y)
 	-- History
 	self.history = {}
 	self.history.array = {}
-	self.history.push = function(_, p, t)
+	self.history.push = function(_, p, t, c)
 		local item = {}
 		item.point = p
 		item.trace = t
+		item.callback = c
 		return table.insert(self.history.array, item)
 	end
 	self.history.pop = function()
@@ -112,7 +113,6 @@ function Player:leaveTrace(x, y)
 	sprite:setCollideRect(0, 0, sprite:getSize())
 	sprite:moveTo(x, y)
 	sprite:add()
-	print(self.level.progress)
 	return sprite
 
 end
@@ -126,6 +126,9 @@ function Player:back()
 		local item = self.history:pop()
 		self:moveTo(item.point)
 		item.trace:remove()
+		if item.callback then
+			item.callback()
+		end
 
 	end
 
@@ -136,18 +139,64 @@ end
 function Player:move(newX, newY)
 
 	local previousX, previousY = self:getPosition()
-	local actualX, actualY, collisions, length = self:moveWithCollisions(newX, newY)
+	-- Set a variable to keep a function for history callback
+	local historyCallback = nil
+	-- Check if we can move to the new position
+	local actualX, actualY, collisions, length = self:checkCollisions(newX, newY)
+	-- If we landed on the new position
 	if newX == actualX and newY == actualY then
+		-- If there was a collision
 		if length > 0 then
 			for _, item in ipairs(collisions) do
+				-- If the collision was with a Light
 				if not item.overlaps and item.other:isa(Light) then
-					self:moveTo(self.x + (newX - previousX), self.y)
-					item.other:toggle()
+					-- Check if we can move next to the light
+					local nextX = newX + (newX - previousX)
+					local nextY = self.y
+					local nextActualX, nextActualY, nextCollisions, nextLength = self:checkCollisions(nextX, nextY)
+					-- If we landed on the next position without any collision
+					if nextX == nextActualX and nextY == nextActualY then
+						local shouldMove = true
+						if nextLength > 0 then
+							for _, nextItem in ipairs(nextCollisions) do
+								-- If we overlap but it's not a light
+								if nextItem.overlaps and not nextItem.other:isa(Light) then
+									shouldMove = false
+								end
+							end
+						end
+						if shouldMove then
+							newX = nextX
+							newY = nextY
+							-- Toggle the Light on or off
+							item.other:toggle()
+							-- Create the callback for back history
+							historyCallback = function()
+								item.other:toggle()
+							end
+						else
+							newX = previousX
+							newY = previousY
+						end
+					end
+				elseif not item.overlaps and item.other:isa(Battery) then
+					newX = previousX
+					newY = previousY
+					self.level:win()
 				end
 			end
 		end
-		local trace <const> = self:leaveTrace(previousX, previousY)
-		self.history:push(playdate.geometry.point.new(previousX, previousY), trace)
+		if newX ~= previousX or newY ~= previousY then
+			-- Actually move the Player
+			self:moveTo(newX, newY)
+			-- Leave the circuit trace behind and push it to history
+			local trace <const> = self:leaveTrace(previousX, previousY)
+			self.history:push(playdate.geometry.point.new(previousX, previousY), trace, historyCallback)
+		else
+			cantSamplePlayer:play()
+		end
+	else
+		cantSamplePlayer:play()
 	end
 
 end
