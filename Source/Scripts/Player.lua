@@ -161,28 +161,17 @@ function Player:move(newX, newY)
 					local nextActualX, nextActualY, nextCollisions, nextLength = self:checkCollisions(nextX, nextY)
 					-- If we landed on the next position without any collision
 					if nextX == nextActualX and nextY == nextActualY then
-						local shouldMove = true
-						if nextLength > 0 then
-							for _, nextItem in ipairs(nextCollisions) do
-								-- If we overlap but it's not a light
-								if nextItem.overlaps and not nextItem.other:isa(Light) then
-									shouldMove = false
-								end
-							end
-						end
-						if shouldMove then
-							newX = nextX
-							newY = nextY
-							-- Toggle the Light on or off
+						newX = nextX
+						newY = nextY
+						-- Toggle the Light on or off
+						item.other:toggle()
+						-- Create the callback for back history
+						historyCallback = function()
 							item.other:toggle()
-							-- Create the callback for back history
-							historyCallback = function()
-								item.other:toggle()
-							end
-						else
-							newX = previousX
-							newY = previousY
 						end
+					else
+						newX = previousX
+						newY = previousY
 					end
 				elseif not item.overlaps and item.other:isa(Battery) then
 					newX = previousX
