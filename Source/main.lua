@@ -9,6 +9,7 @@ import "Scripts/Libraries/LDtk"
 import "Scripts/Player"
 import "Scripts/Light"
 import "Scripts/Battery"
+import "Scripts/Crate"
 import "Scripts/Level"
 import "Scripts/Game"
 local g <const> = Game()

@@ -40,6 +40,8 @@ function Player:collisionResponse(other)
 
 	if other:isa(Light) and not other.isOn then
 		return gfx.sprite.kCollisionTypeOverlap
+	elseif other:isa(Crate) then
+		return gfx.sprite.kCollisionTypeOverlap
 	elseif other:isa(Battery) and self.level.progress == self.level.total then
 		return gfx.sprite.kCollisionTypeOverlap
 	else
@@ -153,7 +155,7 @@ function Player:move(newX, newY)
 		-- If there was a collision
 		if length > 0 then
 			for _, item in ipairs(collisions) do
-				-- If the collision was with a Light
+				-- Collision with a Light
 				if not item.overlaps and item.other:isa(Light) then
 					-- Check if we can move next to the light
 					local nextX = newX + (newX - previousX)
@@ -173,6 +175,20 @@ function Player:move(newX, newY)
 						newX = previousX
 						newY = previousY
 					end
+				-- Collision with a crate
+				elseif not item.overlaps and item.other:isa(Crate) then
+					-- Check if the crate can move to the next cell
+					local nextX = newX + (newX - previousX)
+					local nextY = newY + (newY - previousY)
+					local nextActualX, nextActualY, nextCollisions, nextLength = item.other:checkCollisions(nextX, nextY)
+					-- If the crate landed on the next position without any collision
+					if nextX == nextActualX and nextY == nextActualY then
+						item.other:moveTo(nextX, nextY)
+					else
+						newX = previousX
+						newY = previousY
+					end
+				-- Collision with the battery
 				elseif not item.overlaps and item.other:isa(Battery) then
 					newX = previousX
 					newY = previousY

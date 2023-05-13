@@ -57,6 +57,8 @@ function Level:load()
 			light:attachLevel(self)
 		elseif entity.name == "Battery" then
 			self.battery = Battery(entity.position.x + offset.x, entity.position.y + offset.y)
+		elseif entity.name == "Crate" then
+			Crate(entity.position.x + offset.x, entity.position.y + offset.y)
 		elseif entity.name == "Player" then
 			self.player = Player(entity.position.x + offset.x, entity.position.y + offset.y)
 			self.player:attachLevel(self)
