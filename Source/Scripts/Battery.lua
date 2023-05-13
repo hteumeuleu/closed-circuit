@@ -8,7 +8,6 @@ local tiles <const> = gfx.imagetable.new("Levels/tiles")
 function Battery:init(x, y)
 
 	Battery.super.init(self)
-	self.isOn = false
 	self:setImage(tiles:getImage(2))
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
