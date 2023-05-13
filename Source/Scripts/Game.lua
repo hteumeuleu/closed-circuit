@@ -31,6 +31,9 @@ function Game:addHandlers()
 		downButtonDown = function()
 			self.level.player:down()
 		end,
+		AButtonHeld = function()
+			self.level = Level(self.level.index)
+		end,
 		BButtonDown = function()
 			local function timerCallback()
 				self.level.player:back()
@@ -63,13 +66,17 @@ end
 --
 function Game:restart()
 
+	self.level = Level(1)
+
 end
 
 -- serialize()
 --
 function Game:serialize()
 
-	return ""
+	local data = {}
+	data.level = self.level.index
+	return data
 
 end
 
@@ -85,12 +92,7 @@ end
 --
 function Game:save()
 
-	local prettyPrint = false
-	if playdate.isSimulator then
-		prettyPrint = true
-	end
-	local serialized = self:serialize()
-	playdate.datastore.write(serialized, "game", prettyPrint)
+	playdate.datastore.write(self:serialize(), "game", playdate.isSimulator)
 
 end
 
@@ -99,8 +101,11 @@ end
 function Game:load()
 
 	local save = playdate.datastore.read("game")
+	local index = 1
 	if save then
+		index = tonumber(save.level)
 	end
+	self.level = Level(index)
 
 end
 
