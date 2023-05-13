@@ -7,16 +7,15 @@ gfx.setFont(font)
 function Game:init()
 
 	Game.super.init(self)
-	self:attachEvents()
-	self.level = Level(1)
+	self:addHandlers()
 	self:load()
 	return self
 
 end
 
--- attachEvents()
+-- addHandlers()
 --
-function Game:attachEvents()
+function Game:addHandlers()
 
 	local myInputHandlers = {
 
