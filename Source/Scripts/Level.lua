@@ -75,6 +75,22 @@ function Level:load()
 
 	end
 
+	-- Custom text added on specific levels
+	if self.index == 1 then
+		local image = gfx.image.new(400, 240)
+		gfx.pushContext(image)
+			playdate.graphics.setImageDrawMode(playdate.graphics.kDrawModeFillWhite)
+			if self.index == 1 then
+				playdate.graphics.drawText("B:Back\nA:Restart", 270, 110, nil, 4)
+			end
+		gfx.popContext()
+		local text = gfx.sprite.new(image)
+		text:setCenter(0, 0)
+		text:moveTo(0, 0)
+		text:setZIndex(999)
+		text:add()
+	end
+
 	-- White flash effect
 	local animator = playdate.graphics.animator.new(300, 1, 0,  playdate.easingFunctions.outQuad, 200)
 	local white = gfx.image.new(400, 240, gfx.kColorWhite)

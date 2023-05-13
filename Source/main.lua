@@ -22,8 +22,6 @@ playdate.graphics.sprite.setBackgroundDrawingCallback(
 	function(x, y, width, height)
 		playdate.graphics.setColor(playdate.graphics.kColorBlack)
 		playdate.graphics.fillRect(x, y, width, height)
-		playdate.graphics.setImageDrawMode(playdate.graphics.kDrawModeFillWhite)
-		playdate.graphics.drawTextInRect("Closed Circuit", 130, 20, 140, 7, _, _, kTextAlignment.center)
 	end
 )
 
