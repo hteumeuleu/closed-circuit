@@ -75,13 +75,29 @@ function Level:load()
 
 	end
 
+	-- White flash effect
+	local animator = playdate.graphics.animator.new(300, 1, 0,  playdate.easingFunctions.outQuad, 200)
+	local white = gfx.image.new(400, 240, gfx.kColorWhite)
+	local flash = gfx.sprite.new(white)
+	flash:setCenter(0, 0)
+	flash:moveTo(0, 0)
+	flash:setZIndex(999)
+	flash:add()
+	flash.update = function(that)
+		if not animator:ended() then
+			that:setImage(white:fadedImage(animator:currentValue(), gfx.image.kDitherTypeAtkinson))
+		end
+	end
+
 end
 
 -- win()
 --
 function Level:win()
 
-	print("Win!")
+	-- Sound
 	winSamplePlayer:play()
+	-- Value checked by Game object
+	self.isWon = true
 
 end

@@ -4,6 +4,7 @@ import "CoreLibs/sprites"
 import "CoreLibs/timer"
 import "CoreLibs/ui"
 import "CoreLibs/crank"
+import "CoreLibs/animator"
 
 import "Scripts/Libraries/LDtk"
 import "Scripts/Player"
