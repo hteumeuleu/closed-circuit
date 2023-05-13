@@ -8,7 +8,7 @@ function Game:init()
 
 	Game.super.init(self)
 	self:attachEvents()
-	self.level = Level(2)
+	self.level = Level(1)
 	self:load()
 	return self
 
@@ -33,7 +33,6 @@ function Game:attachEvents()
 			self.level.player:down()
 		end,
 		BButtonDown = function()
-			self.level.player:back()
 			local function timerCallback()
 				self.level.player:back()
 			end
@@ -51,6 +50,13 @@ end
 -- update()
 --
 function Game:update()
+
+	if self.level and self.level.isWon then
+		local index = self.level.index
+		if index >= 1 and index <= 9 then
+			self.level = Level(index+1)
+		end
+	end
 
 end
 
