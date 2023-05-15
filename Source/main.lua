@@ -58,3 +58,13 @@ function playdate.gameWillPause()
 	g:updatePauseScreen()
 
 end
+
+-- playdate.keyPressed()
+--
+function playdate.keyPressed(key)
+
+	if key == "s" then
+		g:skip()
+	end
+
+end

@@ -70,6 +70,19 @@ function Game:restart()
 
 end
 
+-- skip()
+--
+function Game:skip()
+
+	local index = self.level.index
+	local nextIndex = index + 1
+	if nextIndex > 9 or nextIndex < 1 then
+		nextIndex = 1
+	end
+	self.level = Level(nextIndex)
+
+end
+
 -- serialize()
 --
 function Game:serialize()
