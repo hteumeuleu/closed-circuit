@@ -66,6 +66,9 @@ function Level:load()
 		elseif entity.name == "Player" then
 			self.player = Player(entity.position.x + offset.x, entity.position.y + offset.y)
 			self.player:attachLevel(self)
+		elseif entity.name == "Text" then
+			local offGridOffset = playdate.geometry.point.new(tonumber(entity.fields.offsetX), tonumber(entity.fields.offsetY))
+			Text(entity.position.x + offset.x + offGridOffset.x, entity.position.y + offset.y + offGridOffset.y, entity.size.width, entity.size.height, entity.fields.text, tonumber(entity.fields.alignment))
 		end
 	end
 
@@ -73,22 +76,6 @@ function Level:load()
 
 		self.player:attachBattery(self.battery)
 
-	end
-
-	-- Custom text added on specific levels
-	if self.index == 1 then
-		local image = gfx.image.new(400, 240)
-		gfx.pushContext(image)
-			playdate.graphics.setImageDrawMode(playdate.graphics.kDrawModeFillWhite)
-			if self.index == 1 then
-				playdate.graphics.drawText("B:Back\nA:Restart", 270, 110, nil, 4)
-			end
-		gfx.popContext()
-		local text = gfx.sprite.new(image)
-		text:setCenter(0, 0)
-		text:moveTo(0, 0)
-		text:setZIndex(999)
-		text:add()
 	end
 
 	-- White flash effect

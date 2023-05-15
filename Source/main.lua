@@ -11,6 +11,7 @@ import "Scripts/Player"
 import "Scripts/Light"
 import "Scripts/Battery"
 import "Scripts/Crate"
+import "Scripts/Text"
 import "Scripts/Level"
 import "Scripts/Game"
 local g <const> = Game()
