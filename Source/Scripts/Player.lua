@@ -4,6 +4,7 @@ local gfx <const> = playdate.graphics
 local circuitImageTable <const> = gfx.imagetable.new("Assets/circuit")
 local moveSamplePlayer <const> = playdate.sound.sampleplayer.new("Sounds/move")
 local cantSamplePlayer <const> = playdate.sound.sampleplayer.new("Sounds/cant")
+local pushSamplePlayer <const> = playdate.sound.sampleplayer.new("Sounds/push")
 
 -- Player
 --
@@ -184,6 +185,7 @@ function Player:move(newX, newY)
 					-- If the crate landed on the next position without any collision
 					if nextX == nextActualX and nextY == nextActualY then
 						item.other:moveTo(nextX, nextY)
+						pushSamplePlayer:play()
 					else
 						newX = previousX
 						newY = previousY
