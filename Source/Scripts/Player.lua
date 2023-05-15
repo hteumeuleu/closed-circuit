@@ -162,7 +162,7 @@ function Player:move(newX, newY)
 					local nextY = newY + (newY - previousY)
 					local nextActualX, nextActualY, nextCollisions, nextLength = self:checkCollisions(nextX, nextY)
 					-- If we landed on the next position without any collision
-					if nextX == nextActualX and nextY == nextActualY then
+					if nextLength <= 1 and nextX == nextActualX and nextY == nextActualY then
 						newX = nextX
 						newY = nextY
 						-- Toggle the Light on or off
