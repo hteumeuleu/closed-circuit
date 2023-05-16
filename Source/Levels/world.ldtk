@@ -11,7 +11,7 @@
 	"iid": "209a9e00-ed50-11ed-aa77-4501b1118a2e",
 	"jsonVersion": "1.2.5",
 	"appBuildId": 464870,
-	"nextUid": 34,
+	"nextUid": 35,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -1428,7 +1428,7 @@
 							"fieldInstances": [
 								{ "__identifier": "text", "__value": "Push\n\n\nCrate", "__type": "String", "__tile": null, "defUid": 25, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Push\\n\\n\\nCrate"]
+									"params": ["Push\n\n\nCrate"]
 								}] },
 								{ "__identifier": "alignment", "__value": 2, "__type": "Int", "__tile": null, "defUid": 27, "realEditorValues": [{ "id": "V_Int", "params": [2] }] },
 								{ "__identifier": "offsetX", "__value": 9, "__type": "Int", "__tile": null, "defUid": 30, "realEditorValues": [{ "id": "V_Int", "params": [9] }] },
@@ -2386,7 +2386,7 @@
 							"fieldInstances": [
 								{ "__identifier": "text", "__value": "Thanks\nfor\nplaying!", "__type": "String", "__tile": null, "defUid": 25, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Thanks\\nfor\\nplaying!"]
+									"params": ["Thanks\nfor\nplaying!"]
 								}] },
 								{ "__identifier": "alignment", "__value": 2, "__type": "Int", "__tile": null, "defUid": 27, "realEditorValues": [{ "id": "V_Int", "params": [2] }] },
 								{ "__identifier": "offsetX", "__value": 0, "__type": "Int", "__tile": null, "defUid": 30, "realEditorValues": [] },
@@ -2458,6 +2458,103 @@
 					"intGridCsv": [],
 					"autoLayerTiles": [],
 					"seed": 6050982,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": []
+				}
+			],
+			"__neighbours": []
+		},
+		{
+			"identifier": "Level_0",
+			"iid": "cc85ac20-ed50-11ed-97f2-1fe4a269f798",
+			"uid": 34,
+			"worldX": -1376,
+			"worldY": 0,
+			"worldDepth": 0,
+			"pxWid": 400,
+			"pxHei": 240,
+			"__bgColor": "#000000",
+			"bgColor": "#000000",
+			"useAutoIdentifier": false,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__smartColor": "#737373",
+			"__bgPos": null,
+			"externalRelPath": null,
+			"fieldInstances": [],
+			"layerInstances": [
+				{
+					"__identifier": "Entities",
+					"__type": "Entities",
+					"__cWid": 20,
+					"__cHei": 12,
+					"__gridSize": 20,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 10,
+					"__pxTotalOffsetY": 10,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"iid": "cc85d330-ed50-11ed-97f2-c3a7b9bf1a79",
+					"levelId": 34,
+					"layerDefUid": 12,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 4197061,
+					"overrideTilesetUid": null,
+					"gridTiles": [],
+					"entityInstances": [
+						{
+							"__identifier": "Text",
+							"__grid": [7,4],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#663399",
+							"iid": "e1e15ab0-ed50-11ed-97f2-6732a00e12ce",
+							"width": 100,
+							"height": 60,
+							"defUid": 24,
+							"px": [140,80],
+							"fieldInstances": [
+								{ "__identifier": "text", "__value": "Closed Circuit\n\nStart", "__type": "String", "__tile": null, "defUid": 25, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Closed Circuit\\n\\nStart"]
+								}] },
+								{ "__identifier": "alignment", "__value": 2, "__type": "Int", "__tile": null, "defUid": 27, "realEditorValues": [{ "id": "V_Int", "params": [2] }] },
+								{ "__identifier": "offsetX", "__value": 0, "__type": "Int", "__tile": null, "defUid": 30, "realEditorValues": [] },
+								{ "__identifier": "offsetY", "__value": 0, "__type": "Int", "__tile": null, "defUid": 31, "realEditorValues": [] }
+							]
+						}
+					]
+				},
+				{
+					"__identifier": "Tiles",
+					"__type": "Tiles",
+					"__cWid": 20,
+					"__cHei": 12,
+					"__gridSize": 20,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 10,
+					"__pxTotalOffsetY": 10,
+					"__tilesetDefUid": 2,
+					"__tilesetRelPath": "tiles-table-20-20.png",
+					"iid": "cc85d331-ed50-11ed-97f2-719e0c979a7b",
+					"levelId": 34,
+					"layerDefUid": 7,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"visible": true,
+					"optionalRules": [],
+					"intGridCsv": [],
+					"autoLayerTiles": [],
+					"seed": 7328633,
 					"overrideTilesetUid": null,
 					"gridTiles": [],
 					"entityInstances": []

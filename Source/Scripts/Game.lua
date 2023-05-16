@@ -31,14 +31,23 @@ function Game:addHandlers()
 		downButtonDown = function()
 			self.level.player:down()
 		end,
+		AButtonDown = function()
+			if self.level.index == 0 then
+				self.level:win()
+			end
+		end,
 		AButtonHeld = function()
 			self.level = Level(self.level.index)
 		end,
 		BButtonDown = function()
-			local function timerCallback()
-				self.level.player:back()
+			if self.level.index == 0 then
+				self.level:win()
+			else
+				local function timerCallback()
+					self.level.player:back()
+				end
+				self.BButtonDownTimer = playdate.timer.keyRepeatTimer(timerCallback)
 			end
-			self.BButtonDownTimer = playdate.timer.keyRepeatTimer(timerCallback)
 		end,
 		BButtonUp = function()
 			self.BButtonDownTimer:remove()
@@ -56,8 +65,8 @@ function Game:update()
 	if self.level and self.level.isWon then
 		local index = self.level.index
 		print(index)
-		if index < 1 or index >= 10 then
-			index = 1
+		if index < 0 or index >= 10 then
+			index = 0
 		else
 			index += 1
 		end
@@ -79,8 +88,8 @@ end
 function Game:skip()
 
 	local index = self.level.index
-	if index < 1 or index >= 10 then
-		index = 1
+	if index < 0 or index >= 10 then
+		index = 0
 	else
 		index += 1
 	end
