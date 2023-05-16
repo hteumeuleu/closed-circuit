@@ -1,12 +1,14 @@
 class("Game").extends()
 
 local gfx <const> = playdate.graphics
+local bgMusicPlayer <const> = playdate.sound.sampleplayer.new("Sounds/theme")
 local font <const> = gfx.font.new("Assets/closed")
 gfx.setFont(font)
 
 function Game:init()
 
 	Game.super.init(self)
+	bgMusicPlayer:play(0)
 	self:addHandlers()
 	self:addMenuItems()
 	self:load()
