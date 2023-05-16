@@ -8,6 +8,7 @@ function Game:init()
 
 	Game.super.init(self)
 	self:addHandlers()
+	self:addMenuItems()
 	self:load()
 	return self
 
@@ -75,11 +76,11 @@ function Game:update()
 
 end
 
--- restart()
+-- reset()
 --
-function Game:restart()
+function Game:reset()
 
-	self.level = Level(1)
+	self.level = Level(0)
 
 end
 
@@ -139,5 +140,16 @@ end
 -- updatePauseScreen()
 --
 function Game:updatePauseScreen()
+
+end
+
+-- addMenuItems()
+--
+function Game:addMenuItems()
+
+	local menu = playdate.getSystemMenu()
+	menu:addMenuItem("Reset", function()
+		self:reset()
+	end)
 
 end
