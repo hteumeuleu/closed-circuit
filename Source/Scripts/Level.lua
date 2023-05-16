@@ -11,7 +11,7 @@ local winSamplePlayer <const> = playdate.sound.sampleplayer.new("Sounds/win")
 function Level:init(index)
 
 	self.index = index
-	if self.index < 1 or self.index > 9 then
+	if self.index < 1 or self.index > 10 then
 		self.index = 1
 	end
 	self.name = "Level_" .. index

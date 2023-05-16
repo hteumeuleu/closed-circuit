@@ -55,9 +55,13 @@ function Game:update()
 
 	if self.level and self.level.isWon then
 		local index = self.level.index
-		if index >= 1 and index <= 9 then
-			self.level = Level(index+1)
+		print(index)
+		if index < 1 or index >= 10 then
+			index = 1
+		else
+			index += 1
 		end
+		self.level = Level(index)
 	end
 
 end
@@ -75,11 +79,12 @@ end
 function Game:skip()
 
 	local index = self.level.index
-	local nextIndex = index + 1
-	if nextIndex > 9 or nextIndex < 1 then
-		nextIndex = 1
+	if index < 1 or index >= 10 then
+		index = 1
+	else
+		index += 1
 	end
-	self.level = Level(nextIndex)
+	self.level = Level(index)
 
 end
 
