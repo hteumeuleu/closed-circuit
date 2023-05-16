@@ -65,7 +65,6 @@ function Game:update()
 
 	if self.level and self.level.isWon then
 		local index = self.level.index
-		print(index)
 		if index < 0 or index >= 10 then
 			index = 0
 		else
