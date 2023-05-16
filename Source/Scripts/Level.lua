@@ -79,7 +79,7 @@ function Level:load()
 	end
 
 	-- White flash effect
-	local animator = playdate.graphics.animator.new(300, 1, 0,  playdate.easingFunctions.outQuad, 200)
+	local animator = playdate.graphics.animator.new(500, 1, 0,  playdate.easingFunctions.outQuad, 200)
 	local white = gfx.image.new(400, 240, gfx.kColorWhite)
 	local flash = gfx.sprite.new(white)
 	flash:setCenter(0, 0)
