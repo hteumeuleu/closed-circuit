@@ -371,23 +371,23 @@
 		}
 	], "tilesets": [
 		{
-			"__cWid": 8,
+			"__cWid": 9,
 			"__cHei": 1,
 			"identifier": "Tiles_table_20_20",
 			"uid": 2,
 			"relPath": "tiles-table-20-20.png",
 			"embedAtlas": null,
-			"pxWid": 160,
+			"pxWid": 180,
 			"pxHei": 20,
 			"tileGridSize": 20,
 			"spacing": 0,
 			"padding": 0,
 			"tags": [],
 			"tagsSourceEnumUid": 3,
-			"enumTags": [{ "enumValueId": "Solid", "tileIds": [0,1,4,5,6,7] }],
+			"enumTags": [{ "enumValueId": "Solid", "tileIds": [0,1,4,5,6,7,8] }],
 			"customData": [],
 			"savedSelections": [],
-			"cachedPixelData": { "opaqueTiles": "11111111", "averageColors": "f666f999f666f999fdddfcccf999faaa" }
+			"cachedPixelData": { "opaqueTiles": "111111111", "averageColors": "f666f999f666f999fdddfbbbf999faaaf000" }
 		}
 	], "enums": [{ "identifier": "TileEnum", "uid": 3, "values": [{ "id": "Solid", "tileId": null, "color": 12470831, "__tileSrcRect": null }], "iconTilesetUid": 2, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }], "externalEnums": [], "levelFields": [] },
 	"levels": [
@@ -820,7 +820,7 @@
 							"fieldInstances": [
 								{ "__identifier": "text", "__value": "B:Back\nA:Restart", "__type": "String", "__tile": null, "defUid": 25, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["B:Back\\nA:Restart"]
+									"params": ["B:Back\nA:Restart"]
 								}] },
 								{ "__identifier": "alignment", "__value": 0, "__type": "Int", "__tile": null, "defUid": 27, "realEditorValues": [] },
 								{ "__identifier": "offsetX", "__value": 0, "__type": "Int", "__tile": null, "defUid": 30, "realEditorValues": [] },
@@ -2386,7 +2386,7 @@
 							"fieldInstances": [
 								{ "__identifier": "text", "__value": "Thanks\nfor\nplaying!", "__type": "String", "__tile": null, "defUid": 25, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Thanks\nfor\nplaying!"]
+									"params": ["Thanks\\nfor\\nplaying!"]
 								}] },
 								{ "__identifier": "alignment", "__value": 2, "__type": "Int", "__tile": null, "defUid": 27, "realEditorValues": [{ "id": "V_Int", "params": [2] }] },
 								{ "__identifier": "offsetX", "__value": 0, "__type": "Int", "__tile": null, "defUid": 30, "realEditorValues": [] },
@@ -2459,7 +2459,17 @@
 					"autoLayerTiles": [],
 					"seed": 6050982,
 					"overrideTilesetUid": null,
-					"gridTiles": [],
+					"gridTiles": [
+						{ "px": [160,80], "src": [160,0], "f": 0, "t": 8, "d": [88] },
+						{ "px": [180,80], "src": [160,0], "f": 0, "t": 8, "d": [89] },
+						{ "px": [200,80], "src": [160,0], "f": 0, "t": 8, "d": [90] },
+						{ "px": [160,100], "src": [160,0], "f": 0, "t": 8, "d": [108] },
+						{ "px": [180,100], "src": [160,0], "f": 0, "t": 8, "d": [109] },
+						{ "px": [200,100], "src": [160,0], "f": 0, "t": 8, "d": [110] },
+						{ "px": [160,120], "src": [160,0], "f": 0, "t": 8, "d": [128] },
+						{ "px": [180,120], "src": [160,0], "f": 0, "t": 8, "d": [129] },
+						{ "px": [200,120], "src": [160,0], "f": 0, "t": 8, "d": [130] }
+					],
 					"entityInstances": []
 				}
 			],
@@ -2525,7 +2535,7 @@
 							"fieldInstances": [
 								{ "__identifier": "text", "__value": "Closed Circuit\n\nStart", "__type": "String", "__tile": null, "defUid": 25, "realEditorValues": [{
 									"id": "V_String",
-									"params": ["Closed Circuit\\n\\nStart"]
+									"params": ["Closed Circuit\n\nStart"]
 								}] },
 								{ "__identifier": "alignment", "__value": 2, "__type": "Int", "__tile": null, "defUid": 27, "realEditorValues": [{ "id": "V_Int", "params": [2] }] },
 								{ "__identifier": "offsetX", "__value": 0, "__type": "Int", "__tile": null, "defUid": 30, "realEditorValues": [] },
