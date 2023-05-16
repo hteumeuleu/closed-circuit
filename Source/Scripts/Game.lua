@@ -21,16 +21,24 @@ function Game:addHandlers()
 	local myInputHandlers = {
 
 		leftButtonDown = function()
-			self.level.player:left()
+			if self.level.index ~= 0 then
+				self.level.player:left()
+			end
 		end,
 		rightButtonDown = function()
-			self.level.player:right()
+			if self.level.index ~= 0 then
+				self.level.player:right()
+			end
 		end,
 		upButtonDown = function()
-			self.level.player:up()
+			if self.level.index ~= 0 then
+				self.level.player:up()
+			end
 		end,
 		downButtonDown = function()
-			self.level.player:down()
+			if self.level.index ~= 0 then
+				self.level.player:down()
+			end
 		end,
 		AButtonDown = function()
 			if self.level.index == 0 then
@@ -38,7 +46,9 @@ function Game:addHandlers()
 			end
 		end,
 		AButtonHeld = function()
-			self.level = Level(self.level.index)
+			if self.level.index ~= 0 then
+				self.level = Level(self.level.index)
+			end
 		end,
 		BButtonDown = function()
 			if self.level.index == 0 then
@@ -51,7 +61,9 @@ function Game:addHandlers()
 			end
 		end,
 		BButtonUp = function()
-			self.BButtonDownTimer:remove()
+			if self.level.index ~= 0 and self.BButtonDownTimer ~= nil then
+				self.BButtonDownTimer:remove()
+			end
 		end,
 
 	}
