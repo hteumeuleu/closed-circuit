@@ -272,8 +272,8 @@ function LDtk.load_level( level_name )
 		layer.grid_size = layer_data.__gridSize
 		layer.zIndex = layer_count - layer_index
 		layer.rect = {
-			x = level_data.worldX + layer_data.__pxTotalOffsetX,
-			y = level_data.worldY + layer_data.__pxTotalOffsetY,
+			x = layer_data.__pxTotalOffsetX,
+			y = layer_data.__pxTotalOffsetY,
 			width = layer_data.__cWid * layer_data.__gridSize,
 			height = layer_data.__cHei * layer_data.__gridSize
 			}
