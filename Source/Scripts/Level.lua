@@ -32,17 +32,18 @@ function Level:load()
 
 	for layer_name, layer in pairs(ldtk.get_layers(level_name)) do
 		if layer.tiles then
+			printTable(offset.x, offset.y, layer, layer.tileset_file, layer.zIndex)
 			local tilemap = ldtk.create_tilemap(level_name, layer_name)
 			local layerSprite = gfx.sprite.new()
 			layerSprite:setTilemap(tilemap)
 			layerSprite:setCenter(0, 0)
-			layerSprite:moveTo(offset.x, offset.y)
+			layerSprite:moveTo(layer.rect.x, layer.rect.y)
 			layerSprite:setZIndex(layer.zIndex)
 			layerSprite:add()
 
 			local emptyTiles = ldtk.get_empty_tileIDs(level_name, "Solid", layer_name)
 			if emptyTiles then
-				gfx.sprite.addWallSprites(tilemap, emptyTiles, offset.x, offset.y)
+				gfx.sprite.addWallSprites(tilemap, emptyTiles, layer.rect.x, layer.rect.y)
 			end
 		end
 	end
