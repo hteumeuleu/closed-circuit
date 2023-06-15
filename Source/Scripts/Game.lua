@@ -67,6 +67,12 @@ function Game:addHandlers()
 				self.BButtonDownTimer:remove()
 			end
 		end,
+		cranked = function(change, acceleratedChange)
+			local tick = playdate.getCrankTicks(4)
+			if tick == -1 then
+				self.level.player:back()
+			end
+		end
 
 	}
 	playdate.inputHandlers.push(myInputHandlers)
