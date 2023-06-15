@@ -32,7 +32,6 @@ function Level:load()
 
 	for layer_name, layer in pairs(ldtk.get_layers(level_name)) do
 		if layer.tiles then
-			printTable(offset.x, offset.y, layer, layer.tileset_file, layer.zIndex)
 			local tilemap = ldtk.create_tilemap(level_name, layer_name)
 			local layerSprite = gfx.sprite.new()
 			layerSprite:setTilemap(tilemap)
